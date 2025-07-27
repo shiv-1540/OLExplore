@@ -1,0 +1,36 @@
+<p>report-csv works!</p>
+<p>csv-report works!</p>
+<input type="file" (change)="onFileSelected($event)" accept=".csv">
+
+<!-- <div>
+   <ng-container *ngFor="let row of headings ;let i=index">
+       
+        {{row}}
+   </ng-container>
+</div> -->
+
+<div>
+  <h1>CSV Data Display</h1>
+
+  <table class="table table-striped table-bordered">
+    <thead>
+      <tr>
+        <!-- Loop through the keys of the first data item to generate column headers -->
+        <th *ngFor="let key of getKeys(csvParsedData)">{{key}}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Loop through the dataList array to create table rows -->
+      <tr *ngFor="let record of csvParsedData">
+        <!-- Loop through the values of each record to create table data cells -->
+        <td *ngFor="let key of getKeys(record)">{{ record[key] }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+          <!-- chart-component-name.component.html -->
+        <!-- <plotly-plot [data]="graph.data" [layout]="graph.layout"></plotly-plot> -->
+
+
+</div>
+<div id="plot"></div>

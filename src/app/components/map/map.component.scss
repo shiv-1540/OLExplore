@@ -1,0 +1,102 @@
+.mainmappage{
+    display: flex;
+    flex-direction: column;
+    gap:20px;
+}
+
+// #map{
+//     width:100%;
+//     height:600px ;
+
+//     .modal-backdrop {
+//         position: absolute;
+//         top: 0;
+       
+//         right: 0;
+//         background: rgba(0,0,0,0.5);
+//         display: flex;
+//         justify-content: center;
+//         align-items: center;
+//         z-index: 1000;
+// }
+
+// .modal-content {
+//   background: #fff;
+//   padding: 20px;
+//   border-radius: 8px;
+// }
+
+// }
+
+.map-container {
+  width: 100%;
+  height: 500px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Modal Backdrop */
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items:flex-start;
+  justify-content:flex-end;
+  z-index: 10; /* Above the map */
+}
+
+/* Modal Box */
+.modal-content {
+  background-color: #b8b0b0;
+  padding: 20px;
+  border-radius: 8px;
+  min-width: 300px;
+  max-width: 90%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+
+button{
+    background-color: rgb(77, 77, 144);
+    padding: 15px;
+    border-radius: 10px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: medium;
+    color:antiquewhite
+}
+
+#hidebtn{
+    background-color: rgb(160, 35, 7);
+    width: 100px;
+    height:35px;
+    font: 600;
+    font-weight: 600;
+}
+#showbtn{
+    background-color: rgb(77, 77, 144);
+    width: 180px;
+    height:40px;
+}
+.navbar{
+    display: flex;
+    gap: 2rem;
+    background-color: gray;
+    padding: 4px;
+   
+   .select{
+    background-color: rgb(77, 77, 144);
+    padding: 4px;
+    border-radius: 10px;
+    font-weight: 700;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    color:antiquewhite;
+    option{
+        font: 600;
+        // font-weight: 700;
+    }
+   }    
+}

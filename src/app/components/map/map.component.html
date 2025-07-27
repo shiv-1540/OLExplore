@@ -1,0 +1,58 @@
+<div class="mainmappage">
+    <div class="navbar">
+      <button (click)="ToggleView()">
+        Switch to {{ isStreet ? 'Satellite' : 'Street' }}
+    </button>
+    <select [(ngModel)]="selectedOption" (change)="OnChangeOption()" class="select">
+        <option *ngFor="let option of options">
+            {{option.label}}
+        </option>
+    </select>
+
+    <button (click)="getCircleRadii()">
+        GetCircle Radii
+    </button>
+
+    <button (click)="clearCircles()">
+        clear circles
+    </button>
+    <button (click)="clearPolygons()">
+        clear polygons
+    </button>
+    <button (click)="clearLines()">
+        clear lines
+    </button>
+    <button (click)="ToggleDraw()">
+        <ng-container *ngIf="isDrawEnable">Disable Draw </ng-container>
+        <ng-container *ngIf="!isDrawEnable">Enable Draw </ng-container>
+    </button>
+    <mat-checkbox [ngModel]="isModifyAllow" (change)="onCheckboxChange($event)">ModifyAllow</mat-checkbox>
+ </div>
+
+    
+ <div id="map" class="map-container"></div>
+
+<!-- Show Modal Button -->
+<button mat-raised-button color="accent" (click)="showModal()" id="showbtn">Show Circles</button>
+
+<!-- Modal Overlay -->
+<div class="modal-backdrop" *ngIf="modalVisible" (click)="hideModal()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <h3>Circle Radii</h3>
+     <hr/>
+   <div *ngFor="let r of radii; let i = index">
+        <p><strong>circle {{i+1}}</strong></p>
+        <p><strong>Radius:</strong> {{ r.toFixed(2) }} m</p>
+        <p><strong>Area: </strong>{{ getArea(r).toFixed(2) }} m²</p>
+        <p><strong>Center:</strong> ({{ centers[i][0].toFixed(2) }}, {{ centers[i][1].toFixed(2) }})</p>
+        <hr />
+    </div>
+
+    <button mat-button color="warn" (click)="hideModal()" id="hidebtn">Close</button>
+  </div>
+</div>
+
+
+<!-- <button (click)="showModal()">Show Circle Radii</button> -->
+
+
