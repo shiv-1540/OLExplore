@@ -56,7 +56,7 @@ export class MapComponent {
   selectedOption:Type="Polygon";
   modalVisible:boolean=false;
   isDrawEnable:boolean=true;
-  isModifyAllow:boolean=false;
+  isModifyAllow:boolean=true;
 
   polygonCount = 0;
   circleCount = 0;
@@ -111,6 +111,7 @@ export class MapComponent {
    constructor(private http: HttpClient,private snackbar:MatSnackBar) {}
 
     ngOnInit(): void {
+         
          this.vectorSource = new VectorSource();
           this.vectorLayer = new VectorLayer({
             source: this.vectorSource,
@@ -170,7 +171,7 @@ export class MapComponent {
       this.initBaseMap();
       this.loadGeoTiffFromCloud();
 
-       this.addInteraction();
+      this.addInteraction();
       
       this.getCircleRadii();
 
@@ -184,15 +185,15 @@ export class MapComponent {
     draw1!: Draw;
     // source1:VectorSource | undefined;
 
-
-    onCheckboxChange(event:any){
-      //  console.log("Evented is Checked wala>> ",event.checked);
-      //  console.log("Modify Allow>> ",this.isModifyAllow);
-       this.isModifyAllow=event.checked;
-       if(event.checked){
-        this.exModify.init();
-       }
-    }
+// ------
+    // onCheckboxChange(event:any){
+    //   //  console.log("Evented is Checked wala>> ",event.checked);
+    //   //  console.log("Modify Allow>> ",this.isModifyAllow);
+    //    this.isModifyAllow=event.checked;
+    //    if(event.checked){
+    //     this.exModify.init();
+    //    }
+    // }
     clearCircles(){
       this.circleSource.clear();
       this.centers=[];
@@ -568,6 +569,10 @@ export class MapComponent {
       // proj4.defs("EPSG:32645", "+proj=utm +zone=45 +datum=WGS84 +units=m +no_defs");
       // register(proj4);
 
+      const select:Select=new Select();
+      const modify:Modify=new Modify({
+        features:select.getFeatures()
+      })
       this.streetLayer = new TileLayer({
           source: new OSM()
       });
@@ -582,6 +587,7 @@ export class MapComponent {
 
       console.log("Hi from intialize base map>> ")
       this.map = new Map({
+        interactions:[select,modify],
         target: 'map',
         layers: [this.streetLayer,this.sateliteLayer,this.vectorLayer,this.polygonLayer,this.circleLayer],
         

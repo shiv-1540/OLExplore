@@ -30,7 +30,7 @@
 
 .map-container {
   width: 100%;
-  height: 500px;
+  height: 600px;
   position: relative;
   z-index: 1;
 }
@@ -57,14 +57,16 @@
   min-width: 300px;
   max-width: 90%;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  scroll-behavior: smooth;
+  overflow-y: auto;
 }
 
 
 button{
-    background-color: rgb(77, 77, 144);
-    padding: 15px;
+    background-color: rgb(44, 44, 146);
+    padding: 12px;
     border-radius: 10px;
-    font-family: 'Courier New', Courier, monospace;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-size: medium;
     color:antiquewhite
 }
@@ -77,9 +79,11 @@ button{
     font-weight: 600;
 }
 #showbtn{
-    background-color: rgb(77, 77, 144);
-    width: 180px;
+    background-color:  rgb(44, 44, 146);
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    width: 160px;
     height:40px;
+    color: aliceblue;
 }
 .navbar{
     display: flex;
@@ -88,11 +92,12 @@ button{
     padding: 4px;
    
    .select{
-    background-color: rgb(77, 77, 144);
+    background-color: rgb(33, 33, 160);
     padding: 4px;
     border-radius: 10px;
     font-weight: 700;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     color:antiquewhite;
     option{
         font: 600;

@@ -11,22 +11,52 @@
 
 <div>
   <h1>CSV Data Display</h1>
-
-  <table class="table table-striped table-bordered">
+<!-- 
+  <table class="table table-striiped tablee-bordered">
     <thead>
       <tr>
-        <!-- Loop through the keys of the first data item to generate column headers -->
-        <th *ngFor="let key of getKeys(csvParsedData)">{{key}}</th>
+    
+         <p>Hii I am SHiva</p>
       </tr>
-    </thead>
-    <tbody>
-      <!-- Loop through the dataList array to create table rows -->
-      <tr *ngFor="let record of csvParsedData">
-        <!-- Loop through the values of each record to create table data cells -->
-        <td *ngFor="let key of getKeys(record)">{{ record[key] }}</td>
-      </tr>
+    </thead> 
+    <tbody *ngFor="let val of f9pThread">
+       <tr>Nahi aari>> {{val}}</tr>
     </tbody>
+  </table> -->
+
+    <table class="table table-striped table-bordered">
+    <thead>
+      <tr>
+        <!-- <th>{{csvParsedData[0]["Measured Voltage (volts)"]}}</th> -->
+         <p>Hii I am SHiva</p>
+      </tr>
+    </thead> 
+    <tbody *ngFor="let val of anamolies1">
+       <tr>Nahi aari>> {{val.index}}  >> {{val.timeDiff}} >> {{val.timeElapsed}}</tr>
+    </tbody>
+
+
+
   </table>
+   <ng-container *ngIf="anamolies1.length<=0">
+         No Anamaloies Bruh!!
+       </ng-container>
+
+  <!-- <table class="table table-striped table-bordered"> -->
+  <!-- <thead> -->
+      <tr>
+        <!-- Loop through the keys of the first data item to generate column headers -->
+        <!-- <th *ngFor="let key of getKeys(csvParsedData)">{{this.csvParsedData[0][key]}}</th> -->
+      </tr>
+    <!-- </thead> -->
+    <!-- <tbody> -->
+      <!-- Loop through the dataList array to create table rows -->
+      <!-- <tr *ngFor="let record of csvParsedData"> -->
+        <!-- Loop through the values of each record to create table data cells -->
+        <!-- <td *ngFor="let key of getKeys(record)">{{ record[key] }}</td> -->
+      <!-- </tr> -->
+    <!-- </tbody> -->
+  <!-- </table> -->
 
           <!-- chart-component-name.component.html -->
         <!-- <plotly-plot [data]="graph.data" [layout]="graph.layout"></plotly-plot> -->
