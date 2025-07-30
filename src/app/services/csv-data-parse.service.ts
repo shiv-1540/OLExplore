@@ -1,31 +1,37 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CsvDataParseService {
-  csvParsedData: any[] = [];
+  // csvParsedData: any[] = [];
+  // csvParsedData: { [key: string]: any[] } = {};
   hp: { [key: string]: any[] } = {};
+
+
+
   headers: any[] = [];
+
+  csvParsedData$=new BehaviorSubject<{[key:string]:any[]}>({});
 
   constructor() {}
 
-  onFileSelected(event: any) {
-    const file: File = event.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (e: any) => {
-        const csvContent = e.target.result;
-        this.parseCsv(csvContent);
-      };
-      reader.readAsText(file);
-    }
+  parseCsvFile(file: File) {
+    const reader = new FileReader();
+    reader.onload = (e: any) => {
+      const csvContent = e.target.result;
+      this.parseCsv(csvContent);
+    };
+    reader.readAsText(file);
   }
 
-  parseCsv(csvContent: string) {
+  private parseCsv(csvContent: string) {
     const lines = csvContent.split('\n').filter(line => line.trim() !== '');
     const headers = lines[0].split(',').map(h => h.trim());
     this.headers = headers;
+    
+    this.hp={};
 
     for (let i = 1; i < lines.length; i++) {
       const values = lines[i].split(',').map(v => v.trim());
@@ -41,6 +47,7 @@ export class CsvDataParseService {
         }
       }
     }
+    this.csvParsedData$.next(this.hp);
 
     console.log("F9pthread>> ", this.hp["F9pThread"]);
     console.log("timeElapsed>> ", this.hp["timeElapsed"]);

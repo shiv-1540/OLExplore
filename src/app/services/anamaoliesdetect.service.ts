@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 interface AnamoliesInterface{
   index:number,
@@ -14,7 +15,10 @@ export class AnamaoliesdetectService {
   anamolies1:AnamoliesInterface[]=[];
   constructor() { }
 
-  detectAnomalies(values:number[],timeElapsed:string[],timeThresoldInSec:number=60,valueTolerance:number=0):AnamoliesInterface[]{
+  anomalySubject = new BehaviorSubject<AnamoliesInterface[]>([])
+  anamolies$ = this.anomalySubject.asObservable();
+
+  detectAnomalies(values:number[],timeElapsed:string[],timeThresoldInSec:number,valueTolerance:number):void{
     
     function parseTime(timestr:string):number{
       const parts=timestr.split(':').map(parseFloat);
@@ -30,7 +34,7 @@ export class AnamaoliesdetectService {
     const timeInSec=timeElapsed.map(parseTime);
     let lastChangeinTime=timeInSec[0];
     let lastval=values[0];
-    const anamaloies:AnamoliesInterface[]=[];
+    // const anamaloies:AnamoliesInterface[]=[];
 
     for(let i=0;i<values.length;i++){
       const timeDiff=timeInSec[i]-lastChangeinTime;
@@ -42,9 +46,10 @@ export class AnamaoliesdetectService {
       }
 
       if(timeDiff>timeThresoldInSec && valDiff<=valueTolerance){
-        anamaloies.push({ index: i, timeDiff, timeElapsed: timeElapsed[i] });
+        this.anamolies1.push({ index: i, timeDiff, timeElapsed: timeElapsed[i] });
       }
+
+      this.anomalySubject.next(this.anamolies1);
     }
-    return anamaloies;
   }
 }
